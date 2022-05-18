@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import Alerta from '../components/Alerta'
 import clienteAxios from '../config/clienteAxios';
 import axios from 'axios';
@@ -82,10 +83,10 @@ const Registrar = () => {
 
   return (
     <>
-      <h1 className='text-sky-600 font-black text-2xl capitalize'>Crea tu cuenta</h1>
+      <h1 className='text-sky-600 font-black text-2xl capitalize text-center'>Crea tu cuenta</h1>
 
       <form
-        className='my-10 bg-white shadow rounded-sm p-10'
+        className='my-4 bg-white shadow rounded-sm p-10'
         onSubmit={handleSubmit}
       >
         <Alerta alerta={alerta} />
@@ -167,6 +168,21 @@ const Registrar = () => {
         />
 
       </form>
+      <nav className='lg:flex lg:justify-between'>
+        <Link
+          to="/"
+          className="block text-center text-white uppercase text-sm font-bold mb-3"
+        >
+          Ya tienes cuenta? Inicia Sesion
+        </Link>
+
+        {/* <Link
+        to="/olvide-password"
+        className="block text-center text-slate-500 uppercase text-sm"
+        >
+          Olvide mi password
+        </Link> */}
+      </nav>
     </>
   )
 }
