@@ -40,7 +40,6 @@ const Login = () => {
       localStorage.setItem('token', data.token);
       setAuth(data);
       navigate('/permisos')
-
     } catch (error) {
       setAlerta({
         msg: error.response.data.msg,

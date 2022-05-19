@@ -1,62 +1,29 @@
 import React, { useEffect, useState } from 'react'
+import CheckBox from '../components/CheckBox';
+import FormularioPermiso from '../components/FormularioPermiso';
 import { diasEntreFechas } from '../helpers/fechas'
 import formatearFecha from '../helpers/formatearFecha';
 
 const NuevoPermiso = () => {
 
-  const [fechaInicial, setFechaInicial] = useState('');
-  const [fechaFinal, setFechaFinal] = useState('');
-  const [arrayFechas, setArrayFechas] = useState([])
+  
 
-
-
-  useEffect(() => {
-    const fechas = diasEntreFechas(fechaInicial, fechaFinal);
-    setArrayFechas(fechas);
-
-  }, [fechaInicial, fechaFinal])
-
-
-
-  // console.log(fechas);
+  const mostrarArray = ()=>{
+    let ordenado =fechasSeleccionadas.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+    console.log(ordenado);
+  }
 
   return (
     <div>
-      <div>
-        <input type="date"
-          onChange={(e) => setFechaInicial(e.target.value)}
-        />
-        <input type="date"
-          onChange={(e) => setFechaFinal(e.target.value)}
-        />
-      </div>
+      
 
-      <form
+      <button
+      onClick={mostrarArray}
       >
+        consultaArray
+      </button>
 
-
-        <fieldset>
-          <legend>Selecciona las fechas que requieres</legend>
-
-          {
-            arrayFechas.map((fecha) => (
-
-              <div>
-                <input 
-                type="checkbox" 
-                id={fecha} 
-                name="horns" 
-                value={fecha}                
-                on
-                />
-                <label htmlFor={fecha}>{formatearFecha(fecha)}</label>
-              </div>
-            ))
-          }
-
-        </fieldset>
-
-      </form>
+      <FormularioPermiso/>
 
     </div>
   )

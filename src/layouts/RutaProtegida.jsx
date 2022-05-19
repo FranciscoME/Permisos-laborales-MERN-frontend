@@ -18,7 +18,7 @@ const RutaProtegida = () => {
     // />)
   }
 
-  console.log(auth);
+  // console.log(auth);
   return (
     <>
       {auth?._id ? (

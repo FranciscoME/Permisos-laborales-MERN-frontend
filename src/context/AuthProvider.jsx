@@ -5,6 +5,8 @@ import clienteAxios from "../config/clienteAxios";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+
+
   const [auth, setAuth] = useState({});
   const [cargando, setCargando] = useState(true);
   // const navigate = useNavigate();
@@ -27,9 +29,9 @@ const AuthProvider = ({ children }) => {
 
       try {
         const {data} = await clienteAxios.get('/usuarios/perfil',config);
-        // console.log(data);
+      
         
-        setAuth(data.usuario);
+        setAuth(data);
       } catch (error) {
         setAuth({})
       }
