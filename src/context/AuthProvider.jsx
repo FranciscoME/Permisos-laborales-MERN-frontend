@@ -9,6 +9,12 @@ const AuthProvider = ({ children }) => {
 
   const [auth, setAuth] = useState({});
   const [cargando, setCargando] = useState(true);
+  const [cargandoModificar, setCargandoModificar] = useState(true);
+  const [userData, setUserData] = useState({ nombre:'',
+  email:'',
+  departamento:'',
+  tarjeta:'',
+  turno:''});
   // const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,6 +48,35 @@ const AuthProvider = ({ children }) => {
     }
     autenticarUsuario();
   }, [])
+
+
+  const consultarUsuario = async (id)=>{
+    const token = localStorage.getItem('token');
+
+      if(!token){
+        setCargando(false);
+        return;
+      }
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`
+        }
+      }
+
+      try {
+        const {data} = await clienteAxios.get(`/usuarios/obtener-usuario/${id}`,config);
+        setUserData(data);     
+        
+        // setAuth(data);
+      } catch (error) {
+        setAuth({})
+      }
+      finally{
+        setCargandoModificar(false)
+      }
+  }
   
   const cerrarSesionAuth = ()=>{
     setAuth({});
@@ -53,7 +88,11 @@ const AuthProvider = ({ children }) => {
       value={{
         auth,
         cargando,
-        setAuth
+        cargandoModificar,
+        userData,
+        setAuth,
+        setUserData,
+        consultarUsuario
       }}
     >
       {children}

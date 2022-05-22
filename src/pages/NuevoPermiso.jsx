@@ -8,20 +8,20 @@ const NuevoPermiso = () => {
 
   
 
-  const mostrarArray = ()=>{
-    let ordenado =fechasSeleccionadas.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
-    console.log(ordenado);
-  }
+  // const mostrarArray = ()=>{
+  //   let ordenado =fechasSeleccionadas.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+  //   console.log(ordenado);
+  // }
 
   return (
     <div>
       
-
+{/* 
       <button
       onClick={mostrarArray}
       >
         consultaArray
-      </button>
+      </button> */}
 
       <FormularioPermiso/>
 

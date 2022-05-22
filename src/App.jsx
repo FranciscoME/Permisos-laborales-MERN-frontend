@@ -6,6 +6,7 @@ import AuthLayout from './layouts/AuthLayout'
 import RutaProtegida from './layouts/RutaProtegida'
 import DetallePermiso from './pages/DetallePermiso'
 import Login from './pages/Login'
+import ModificarUsuario from './pages/ModificarUsuario'
 import NuevoPermiso from './pages/NuevoPermiso'
 import Permisos from './pages/Permisos'
 import Registrar from './pages/Registrar'
@@ -26,6 +27,8 @@ function App() {
               <Route index element={<Permisos />} />
               <Route path='nuevo-permiso' element={<NuevoPermiso />} />
               <Route path='detalles-permiso/:id' element={<DetallePermiso/>}/>
+
+              <Route path='modificar-usuario/:id' element={<ModificarUsuario/>}/>
             </Route>
           </Routes>
         </PermisosProvider>

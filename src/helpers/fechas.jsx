@@ -20,7 +20,16 @@ const diasEntreFechas = (fechaInicial,fechaFinal) => {
   return arrayFechas;
 }
 
+const getYears = ()=>{
+  // const moonLanding = new Date('July 20, 69 00:20:18');
+  return [new Date().getFullYear(), new Date().getFullYear()-1]
+  
+}
+
+
+
 
 export {
+  getYears,
   diasEntreFechas
 }

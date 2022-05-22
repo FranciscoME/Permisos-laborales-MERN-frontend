@@ -3,26 +3,27 @@ import PreviewPermiso from '../components/PreviewPermiso';
 import usePermiso from '../hooks/usePermiso';
 
 const Permisos = () => {
-  const {permisos}=usePermiso();
+  const { permisos } = usePermiso();
 
   return (
-    <>
-     <h1
-     className='text-4xl font-black'
-     >Mis Permisos</h1> 
+      <div className='m-10'>
 
-    <div className='bg-white shadow mt-10 rounded-lg'>
-      {
-        permisos.map((permiso)=>(
-          <PreviewPermiso
-            key={permiso._id}
-            permiso={permiso}
-          />
-        ))
-      }
-    </div>
+        <h1
+          className='ml-10 text-4xl font-black text-center'
+        >Mis Permisos</h1>
 
-    </>
+        <div className='bg-white shadow  rounded-lg  m-10 '>
+          {
+            permisos.map((permiso) => (
+              <PreviewPermiso
+                key={permiso._id}
+                permiso={permiso}
+              />
+            ))
+          }
+        </div>
+      </div>
+
   )
 }
 

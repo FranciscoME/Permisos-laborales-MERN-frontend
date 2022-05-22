@@ -60,11 +60,12 @@ const PermisosProvider = ({ children }) => {
       const { data } = await clienteAxios.post('/permisos', permiso, config)
       // setPermiso(data)
       setPermisos([
-        ...permisos,
-        data
+        data,
+        ...permisos
       ])
 
       navigate('/permisos');
+      imprimirReciboPDF(data._id);
     } catch (error) {
       // console.log(error.response.data);
       setAlerta({
@@ -126,6 +127,41 @@ const PermisosProvider = ({ children }) => {
   
   }
 
+  const imprimirReciboPDF = async  (id)=>{
+
+    console.log('id:',id);
+         try {
+        const token = localStorage.getItem('token');
+        if (!token)
+          return;
+
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          
+          },
+          responseType: 'blob',          
+        }
+  
+        const {data} =await  clienteAxios.get(`/permisopdf/${id}`, config)
+        console.log(data);
+        window.open(URL.createObjectURL(data));
+        // console.log(data);
+  
+        // navigate('/permisos');
+      } catch (error) {
+        // console.log(error.response.data);
+        setAlerta({
+          msg: error.response.data,
+          error: true
+        })
+      }
+  
+
+  
+  }
+
 
 
   return (
@@ -137,7 +173,8 @@ const PermisosProvider = ({ children }) => {
         handleGuardarPermiso,
         consultarPermiso,
         setCargandoPermiso,
-        eliminarPermiso
+        eliminarPermiso,
+        imprimirReciboPDF
       }}
     >
       {children}
