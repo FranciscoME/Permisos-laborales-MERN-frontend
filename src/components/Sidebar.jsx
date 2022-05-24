@@ -7,18 +7,18 @@ const Sidebar = () => {
   
 
   return (
-    <aside >
+    <aside  className='flex flex-col ml-5 '>
       <p className='mb-10'>Hola: {nombre}</p>
       <Link
         to='nuevo-permiso'
-        className='bg-sky-600 w-full p-3 mt-5'
+        className='bg-sky-600 w-full p-3 mt-5 rounded-md'
       >
         Nuevo Permiso
       </Link>
 
       <Link
         to={`modificar-usuario/${_id}`}
-        className='bg-sky-600 w-full p-3 mt-5'
+        className='bg-orange-600 w-full p-3 mt-5 rounded-md'
       >
        Cambiar mis datos
       </Link>

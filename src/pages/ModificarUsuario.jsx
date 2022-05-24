@@ -1,88 +1,137 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Alerta from '../components/Alerta';
+import Loader from '../components/Loader/Loader';
 import useAuth from '../hooks/useAuth'
 
 
 const departamentos = [
-  ,'ARCHIVO'
-  ,'ALMACÉN'
-  ,'CALIDAD'
-  ,'CONSULTA EXTERNA'
-  ,'DENTAL'
-  ,'ENFERMERÍA'
-  ,'ESTADISTICA'
-  ,'HOSPITALIZACIÓN'
-  ,'INFORMATICA'
-  ,'INTENDENCIA'
-  ,'JURÍDICO'
-  ,'LAVANDERÍA'
-  ,'MANTENIMIENTO'
-  ,'MODULO'
-  ,'PSICOLOGÍA'
-  ,'PSICOLOGÍA '
-  ,'RECURSOS HUMANOS'
-  ,'REHABILITACIÓN INTERNA'
-  ,'SEGURO POPULAR'
-  ,'SERVICIOS GENERALES'
-  ,'TRABAJO SOCIAL'
-  ,'URGENCIAS'
-  ]
-  
-  const turnos=[
-  ,'MATUTINO'
-  ,'JORNADA ACUMULADA'
-  ,'VESPERTINO'
-  ,'NOCTURNO A'
-  ,'J.E. NOCTURNA'
-  ,'NOCTURNA B'
-  ,'NOCTURNO B'
-  ,'NOCTURNO A '
-  ,'NCTURNO A'
-  ,'JORNADA ESPECIAL'
-  
-  ]
+  , 'ARCHIVO'
+  , 'ALMACÉN'
+  , 'CALIDAD'
+  , 'CONSULTA EXTERNA'
+  , 'DENTAL'
+  , 'ENFERMERÍA'
+  , 'ESTADISTICA'
+  , 'HOSPITALIZACIÓN'
+  , 'INFORMATICA'
+  , 'INTENDENCIA'
+  , 'JURÍDICO'
+  , 'LAVANDERÍA'
+  , 'MANTENIMIENTO'
+  , 'MODULO'
+  , 'PSICOLOGÍA'
+  , 'PSICOLOGÍA '
+  , 'RECURSOS HUMANOS'
+  , 'REHABILITACIÓN INTERNA'
+  , 'SEGURO POPULAR'
+  , 'SERVICIOS GENERALES'
+  , 'TRABAJO SOCIAL'
+  , 'URGENCIAS'
+]
+
+const turnos = [
+  , 'MATUTINO'
+  , 'JORNADA ACUMULADA'
+  , 'VESPERTINO'
+  , 'NOCTURNO A'
+  , 'J.E. NOCTURNA'
+  , 'NOCTURNA B'
+  , 'NOCTURNO B'
+  , 'NOCTURNO A '
+  , 'NCTURNO A'
+  , 'JORNADA ESPECIAL'
+
+]
 
 
 const ModificarUsuario = () => {
 
   const { id } = useParams();
-  const { cargandoModificar,userData, consultarUsuario,setUserData } = useAuth();
+  const {alerta,mostrarAlerta, cargandoModificar, userData, consultarUsuario, actualizarUsuario } = useAuth();
 
 
-  const [alerta, setAlerta] = useState('');
-  const [userForm, setUserForm] = useState({});
+  // const [alerta, setAlerta] = useState('');
+
+  const [userForm, setUserForm] = useState({})
 
 
   // consultarUsuario(id);
   useEffect(() => {
     consultarUsuario(id);
+    // setUserForm(userData);    
   }, [])
+
+  useEffect(() => {
+    if (userData) {
+      setUserForm(userData);
+    }
+
+  }, [userData])
+
+  
+  console.log('hola');
+
+  useEffect(() => {
+    if(Object.keys(alerta).length > 0){
+      setTimeout(() => {
+        mostrarAlerta({})
+      },4000)
+    }
+  }, [alerta])
+  
+
 
 
   // console.log(userData);
-  const {departamento,nombre,email,tarjeta,turno,_id}= userData;
+  const { departamento, nombre, email, tarjeta, turno, _id } = userForm;
 
-  if(cargandoModificar){
-    return 'Cargando...'
+  if (cargandoModificar) {
+    return (<Loader />)
   }
 
-  const handleChange = (e)=>{
+  // console.log(userForm);
+
+  const handleChange = (e) => {
     setUserForm({
-      ...userData,
-      [e.target.name]:e.target.value
+      ...userForm,
+      [e.target.name]: e.target.value
     })
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (departamento.trim() === '' || nombre.trim() === '' || email.trim() === '' || tarjeta.trim() === '' || turno.trim() === '') {
+      mostrarAlerta({
+        msg:'Todos los campos son obligatorios',
+        error:true
+      })
+    }
+
+    actualizarUsuario(userForm)
+
+    setUserForm({nombre: '',
+    email: '',
+    departamento: '',
+    tarjeta: '',
+    turno: ''});
+
+  }
+
+  const {msg}=alerta;
+
   return (
     <div>
-      <h1 className='text-sky-600 font-black text-2xl capitalize text-center'>Crea tu cuenta</h1>
+      <h1 className='text-sky-600 font-black text-2xl capitalize text-center'>Modifica tu cuenta</h1>
 
       <form
         className='my-4 bg-white shadow rounded-sm p-10'
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
       >
-        <Alerta alerta={alerta} />
+        {
+          msg&&<Alerta alerta={alerta} />
+        }
         <div className='my-5'>
           <label
             htmlFor="nombre"
@@ -208,6 +257,7 @@ const ModificarUsuario = () => {
           type="submit"
           value='Actualizar mis datos'
           className='mt-5 bg-sky-600 text-white p-3 rounded-xl '
+          onSubmit={handleSubmit}
         />
 
       </form>

@@ -294,6 +294,7 @@ const FormularioPermiso = () => {
               <input
                 type="date"
                 defaultValue={new Date().toISOString().split('T')[0]}
+                // defaultValue={new Date()..split('T')[0]}
                 id='fecha-elaboracion'
                 name="fecha-elaboracion"
                 className='border-2 w-full p-2 mt-2  rounded-md'
