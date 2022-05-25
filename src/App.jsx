@@ -28,7 +28,7 @@ function App() {
               <Route path='nuevo-permiso' element={<NuevoPermiso />} />
               <Route path='detalles-permiso/:id' element={<DetallePermiso/>}/>
 
-              <Route path='modificar-usuario/:id' element={<ModificarUsuario/>}/>
+              <Route path='modificar-usuario/:id' element={<Registrar/>}/>
             </Route>
           </Routes>
         </PermisosProvider>

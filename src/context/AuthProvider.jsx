@@ -16,7 +16,9 @@ const AuthProvider = ({ children }) => {
     email: '',
     departamento: '',
     tarjeta: '',
-    turno: ''
+    turno: '',
+    password1: '',
+    password2: '',
   });
   // const navigate = useNavigate();
 
@@ -53,6 +55,7 @@ const AuthProvider = ({ children }) => {
     autenticarUsuario();
   }, [])
 
+  
 
   const consultarUsuario = async (id) => {
     const token = localStorage.getItem('token');
@@ -85,7 +88,7 @@ const AuthProvider = ({ children }) => {
   const actualizarUsuario = async (usuario) => {
     const token = localStorage.getItem('token');
 
-    console.log(usuario);
+    // console.log(usuario);
     if (!token) {
       setCargando(false);
       return;
@@ -120,6 +123,17 @@ const AuthProvider = ({ children }) => {
 
   const cerrarSesionAuth = () => {
     setAuth({});
+    setAlerta({});
+    setUserData({
+      nombre: '',
+      email: '',
+      departamento: '',
+      tarjeta: '',
+      turno: '',
+      password1: '',
+      password2: '',
+    });
+    localStorage.removeItem('token');
   }
 
 
@@ -135,7 +149,9 @@ const AuthProvider = ({ children }) => {
         setUserData,
         consultarUsuario,
         actualizarUsuario,
-        mostrarAlerta
+        mostrarAlerta,
+        cerrarSesionAuth,
+
       }}
     >
       {children}

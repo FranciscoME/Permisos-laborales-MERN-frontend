@@ -8,7 +8,7 @@ const Sidebar = () => {
 
   return (
     <aside  className='flex flex-col ml-5 '>
-      <p className='mb-10'>Hola: {nombre}</p>
+      <p className='mb-10'>Hola: {nombre.split(' ')[0]}</p>
       <Link
         to='nuevo-permiso'
         className='bg-sky-600 w-full p-3 mt-5 rounded-md'

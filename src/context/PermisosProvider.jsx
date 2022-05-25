@@ -1,11 +1,13 @@
 import { createContext, useEffect, useState } from "react"
 import clienteAxios from "../config/clienteAxios";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const PermisosContext = createContext();
 
 const PermisosProvider = ({ children }) => {
+
+  const [params,setParams] = useParams();
 
   const [permiso, setPermiso] = useState({});
   const [alerta, setAlerta] = useState({});
@@ -30,8 +32,11 @@ const PermisosProvider = ({ children }) => {
           }
         }
 
-        const { data } = await clienteAxios.get('/permisos', config)
-        setPermisos(data)
+        const {data} = await clienteAxios.get('/permisos', config)
+        console.log(data.total);
+        // console.log(data.permisos);
+        setPermisos(data.permisos)
+        // console.log(data.total.value);
       } catch (error) {
         // console.log(error.response.data);
         setAlerta({
