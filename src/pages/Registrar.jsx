@@ -97,6 +97,8 @@ const Registrar = () => {
       // return console.log('no debe haber campos vacios');
     }
 
+   
+
 
     if (isUpdateUser) {
       // Actualizar usuario
@@ -127,6 +129,13 @@ const Registrar = () => {
 
       if (password1 !== password2) {
         return console.log('las contraseñas no coinciden');
+      }
+
+      if (password1.trim().length<=5 || password2.trim().length<=5) {
+        setAlerta({
+          error: true,
+          msg: 'El password debe tener una longitud minima de 5 caracteres'
+        })
       }
 
       try {
