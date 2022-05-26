@@ -122,7 +122,7 @@ const ModificarUsuario = () => {
   const {msg}=alerta;
 
   return (
-    <div>
+    <div className=''>
       <h1 className='text-sky-600 font-black text-2xl capitalize text-center'>Modifica tu cuenta</h1>
 
       <form

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import usePermiso from '../hooks/usePermiso'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import formatearFecha from '../helpers/formatearFecha';
 
 const DetallePermiso = () => {
@@ -13,8 +13,8 @@ const DetallePermiso = () => {
 
   useEffect(() => {
     consultarPermiso(id);
-    setCargandoPermiso(false);
-  }, [])
+    // setCargandoPermiso(false);
+  }, [id])
   // console.log(cargandoPermiso);
 
   if (cargandoPermiso) {
@@ -26,7 +26,11 @@ const DetallePermiso = () => {
   // console.log(_id);
 
   const handleEliminarPermiso = () => {
-    eliminarPermiso(_id)
+
+    const respuesta=confirm('Deseas eliminar este permiso?')
+    if(respuesta){
+      eliminarPermiso(_id)
+    }
   }
 
   const handleReimprimirRecibo = () => {
@@ -35,7 +39,8 @@ const DetallePermiso = () => {
 
 
   return (
-    <div className='mx-40 w-full bg-slate-50  mt-10 flex flex-col items-center rounded-lg shadow-sm'>
+    <div className='md:ml-10 w-full bg-slate-50  mt-10 flex flex-col items-center rounded-lg shadow-sm'>
+
       <p className='text-2xl font-semibold text-center'>Tipo de permiso <span className='text-sky-600 block'>{concepto}</span> </p>
       {/* <p>{permiso?.fechaCreacion}</p> */}
       {permiso.fechaCreacion
@@ -46,7 +51,7 @@ const DetallePermiso = () => {
       {
         permiso.concepto && (
 
-          permiso?.fechas.map(fecha => (
+          permiso.fechas.map(fecha => (
             <p
               key={fecha}
               className='rounded-sm m-2 border-b-2'
@@ -61,6 +66,19 @@ const DetallePermiso = () => {
         permiso.concepto &&
         <p className='p-3'>{notas}</p>
       }
+
+        <div className='bg-yellow-300 md:8/12 font-bold p-2 mb-4 rounded-md m-2 flex justify-items-center items-center'>
+
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z" clipRule="evenodd" />
+          </svg>
+        <Link
+          className=''
+          to={`/permisos`}
+        >
+          Regresar</Link>
+        </div>
+
 
       <button
         className='bg-sky-500 md:8/12 font-bold p-2 mb-4 rounded-md m-2 flex  text-white'
@@ -84,7 +102,7 @@ const DetallePermiso = () => {
         className='bg-red-400 md:8-12 font-bold p-2 rounded-md m-2 flex text-gray-100'
         onClick={handleEliminarPermiso}
       >
-         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
         </svg>
         Eliminar permiso

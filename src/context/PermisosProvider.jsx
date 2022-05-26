@@ -13,6 +13,7 @@ const PermisosProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [permisos, setPermisos] = useState([]);
   const [cargandoPermiso, setCargandoPermiso] = useState(true);
+  const [cargandoPermisos, setCargandoPermisos] = useState(true);
 
   const [desde, setDesde] = useState(0);
   const [limite, setLimite] = useState(5);
@@ -32,6 +33,7 @@ const PermisosProvider = ({ children }) => {
 
 
 
+
   const obtenerPermisos = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -46,10 +48,11 @@ const PermisosProvider = ({ children }) => {
 
 
       const {data} = await clienteAxios.get(`/permisos?desde=${desde}&limite=${limite}`, config )
-      console.log(data.total);
+      // console.log(data.total);
       // console.log(data.permisos);
       setPermisos(data.permisos)
       setTotalPermisos(data.total);
+      setCargandoPermisos(false);
       // console.log(data.total.value);
       
     } catch (error) {
@@ -58,6 +61,7 @@ const PermisosProvider = ({ children }) => {
         msg: error.response.data,
         error: true
       })
+      setCargandoPermisos(false)
     }
   }
 
@@ -109,9 +113,12 @@ const PermisosProvider = ({ children }) => {
       // console.log(data);
       setPermiso(data);
     } catch (error) {
-      
+      setAlerta({
+        msg: error.response.data,
+        error: true
+      })
     }
-    
+    setCargandoPermiso(false); 
     
   }
 
@@ -135,7 +142,7 @@ const PermisosProvider = ({ children }) => {
       setPermisos(permisosActualizados)
       navigate('/permisos')
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       // setAlerta({
       //   msg: error.response.data,
       //   error: true
@@ -146,7 +153,6 @@ const PermisosProvider = ({ children }) => {
 
   const imprimirReciboPDF = async  (id)=>{
 
-    console.log('id:',id);
          try {
         const token = localStorage.getItem('token');
         if (!token)
@@ -162,7 +168,7 @@ const PermisosProvider = ({ children }) => {
         }
   
         const {data} =await  clienteAxios.get(`/permisopdf/${id}`, config)
-        console.log(data);
+        // console.log(data);
         window.open(URL.createObjectURL(data));
         // console.log(data);
   
@@ -188,6 +194,7 @@ const PermisosProvider = ({ children }) => {
         desde,
         limite,
         totalPermisos,
+        cargandoPermisos,
         obtenerPermisos,
         handleGuardarPermiso,
         consultarPermiso,

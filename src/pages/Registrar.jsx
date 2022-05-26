@@ -241,7 +241,7 @@ const Registrar = () => {
       }
 
       <form
-        className='my-4 bg-white shadow rounded-sm p-10'
+        className='my-4 bg-white shadow rounded-sm p-10 ml-20 '
         onSubmit={handleSubmit}
       >
         <Alerta alerta={alerta} />
@@ -376,7 +376,7 @@ const Registrar = () => {
           type="submit"
 
           value={isUpdateUser ? 'Actualizar mis datos' : 'Registrarme'}
-          className='mt-5 bg-sky-600 text-white p-3 rounded-xl '
+          className='mt-5 bg-sky-600 text-white p-3 rounded-xl hover:bg-sky-700 transition-colors w-full text-lg hover:cursor-pointer font-bold'
         />
 
       </form>

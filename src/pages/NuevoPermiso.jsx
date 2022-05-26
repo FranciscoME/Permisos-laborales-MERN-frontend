@@ -14,8 +14,10 @@ const NuevoPermiso = () => {
   // }
 
   return (
-    <div>
-      
+    <div className='m-10'>
+       <h1
+        className='ml-10 text-4xl font-black text-center mb-5'
+      >Crear nuevo permiso</h1>
 {/* 
       <button
       onClick={mostrarArray}

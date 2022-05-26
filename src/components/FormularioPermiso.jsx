@@ -63,8 +63,6 @@ const FormularioPermiso = () => {
     }
     setArrayFechas([]);
 
-
-
   }, [permiso])
 
   useEffect(() => {
@@ -99,6 +97,7 @@ const FormularioPermiso = () => {
   }
 
   const handlePermiso = (e) => {
+    
     setPermiso(e.target.value)
   }
 
@@ -134,7 +133,7 @@ const FormularioPermiso = () => {
     <>
 
       <form
-        className='bg-white py-10 px-5 md:1/2 rounded-gl'
+        className='bg-white py-10 px-5 md:1/2 rounded md:m-10'
         onSubmit={handleSubmit}
       >
         <div className='mb-5'>
@@ -144,7 +143,7 @@ const FormularioPermiso = () => {
         </div>
 
         <fieldset>
-          <legend>Que tipo de permiso requieres?</legend>
+          <legend className='text-lg font-semibold'>Que tipo de permiso requieres?</legend>
           <select
             name='permiso'
             className='bg-gray-300 m-1 p-2'
@@ -162,78 +161,48 @@ const FormularioPermiso = () => {
           </select>
         </fieldset>
 
-        {
-          tipoFechaMenu==='dos'?(
-            <fieldset>
-              
-                <legend>Selecciona el año</legend>
-                <select
-                  name='anioVacaciones'
-                  className='bg-gray-300 m-1 p-2'
-                  onChange={(e)=>setAnioSeleccionado(e.target.value)}
-                  defaultValue={anioSeleccionado}
-                >
-                  {
-                    arrayAnios.map(permiso => (
-                      <option
-                        key={permiso}
-                        value={permiso}
-                      >{permiso}</option>
-                    ))
-                  }
-                </select>
-              </fieldset>
-          ):null
-        }
+       
+
+        
 
         {tipoFechaMenu === 'dos'
           ? (
-            <div>
+            <div className='flex flex-col'>
 
               <label
                 htmlFor="fecha-inicial"
+                className='text-lg font-semibold'
               >Selecciona la fecha Inicial </label>
               <input
                 type="date"
                 id='fecha-incial'
-                className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
+                className='border-2 w-full md:w-2/5 p-2 mt-2 placeholder-gray-400 rounded-md'
                 onChange={(e) => setFechaInicial(e.target.value)}
               />
               <label
-                htmlFor="fecha-inicial"
+                htmlFor="fecha-final"
+                className='text-lg font-semibold '
               >Selecciona la fecha Final </label>
               <input type="date"
                 id='fecha-final'
-                className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
+                className='border-2 w-full md:w-2/5 p-2 mt-2 placeholder-gray-400 rounded-md'
 
                 onChange={(e) => setFechaFinal(e.target.value)}
               />
 
-              {/* <fieldset>
-                <legend>Selecciona el año de las vacaciones</legend>
-                <select
-                  name='permiso'
-                  className='bg-gray-300 m-1 p-2'
-                  onChange={handlePermiso}
-                >
-                  {
-                    arrayAnios.map(permiso => (
-                      <option
-                        key={permiso}
-                        value={permiso}
-                      >{permiso}</option>
-                    ))
-                  }
-                </select>
-              </fieldset> */}
+          
 
             </div>
           )
           : (
-            <div>
-
+            <div className='flex flex-col'>
+              
+              <label
+                htmlFor="fecha-inicial"
+                className='text-lg font-semibold'
+              >Selecciona la fecha que requires </label>
               <input type="date"
-                className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
+                className='border-2 w-full md:w-2/5 p-2 mt-2 placeholder-gray-400 rounded-md'
 
                 onChange={(e) => setFechaUnica(e.target.value)}
               />
@@ -276,20 +245,24 @@ const FormularioPermiso = () => {
 
         </fieldset>
 
-        <div className='mb-3'>
-          <label htmlFor="notas">Notas:</label>
+        <div className='mb-3 flex flex-col'>
+          <label 
+          htmlFor="notas"
+          className='text-lg font-semibold'
+          >Notas:</label>
           <textarea
             id='notas'
-            className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-sm'
+            className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-sm md:w-5/6'
             placeholder='Agrega notas sobre tu permiso'
             onChange={(e) => setNota(e.target.value)}
           />
 
         </div>
 
-        <div className='mb-3'>
+        <div className='mb-3 flex flex-col'>
         <label
                 htmlFor="fecha-elaboracion"
+                className='text-lg font-semibold'
               >Selecciona la fecha de elaboracion: </label>
               <input
                 type="date"
@@ -297,7 +270,7 @@ const FormularioPermiso = () => {
                 // defaultValue={new Date()..split('T')[0]}
                 id='fecha-elaboracion'
                 name="fecha-elaboracion"
-                className='border-2 w-full p-2 mt-2  rounded-md'
+                className='border-2 w-full p-2 mt-2 rounded-md md:w-2/5'
                 onChange={(e) => setFechaDeElaboracion(e.target.value)}
               />
         </div>
@@ -305,7 +278,7 @@ const FormularioPermiso = () => {
         <input
           type='submit'
           value='Solicitar permiso'
-          className='bg-sky-600 uppercase p-2 font-bold text-white rounded cursor-pointer hover:bg-sky-700'
+          className='bg-sky-600 uppercase p-2 font-bold text-white rounded cursor-pointer hover:bg-sky-700 mt-3 '
         />
       </form>
     </>
