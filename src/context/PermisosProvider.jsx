@@ -1,53 +1,65 @@
 import { createContext, useEffect, useState } from "react"
 import clienteAxios from "../config/clienteAxios";
 import useAuth from "../hooks/useAuth";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 const PermisosContext = createContext();
 
 const PermisosProvider = ({ children }) => {
 
-  const [params,setParams] = useParams();
+  const [params,setParams] = useSearchParams();
 
   const [permiso, setPermiso] = useState({});
   const [alerta, setAlerta] = useState({});
   const [permisos, setPermisos] = useState([]);
   const [cargandoPermiso, setCargandoPermiso] = useState(true);
 
+  const [desde, setDesde] = useState(0);
+  const [limite, setLimite] = useState(5);
+  const [totalPermisos, setTotalPermisos] = useState(0);
+
   const { auth } = useAuth();
   const navigate = useNavigate();
 
 
-  useEffect(() => {
-
-    const obtenerPermisos = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token)
-          return;
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          }
-        }
-
-        const {data} = await clienteAxios.get('/permisos', config)
-        console.log(data.total);
-        // console.log(data.permisos);
-        setPermisos(data.permisos)
-        // console.log(data.total.value);
-      } catch (error) {
-        // console.log(error.response.data);
-        setAlerta({
-          msg: error.response.data,
-          error: true
-        })
-      }
-    }
+  useEffect(() => {    
     obtenerPermisos()
   }, [auth])
 
+  useEffect(() => {
+    obtenerPermisos()
+  }, [desde])
+
+
+
+  const obtenerPermisos = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token)
+        return;
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+
+      const {data} = await clienteAxios.get(`/permisos?desde=${desde}&limite=${limite}`, config )
+      console.log(data.total);
+      // console.log(data.permisos);
+      setPermisos(data.permisos)
+      setTotalPermisos(data.total);
+      // console.log(data.total.value);
+      
+    } catch (error) {
+      // console.log(error.response.data);
+      setAlerta({
+        msg: error.response.data,
+        error: true
+      })
+    }
+  }
 
   const handleGuardarPermiso = async (permiso) => {
     // console.log(permiso);
@@ -162,9 +174,7 @@ const PermisosProvider = ({ children }) => {
           error: true
         })
       }
-  
-
-  
+    
   }
 
 
@@ -175,11 +185,17 @@ const PermisosProvider = ({ children }) => {
         permiso,
         permisos,
         cargandoPermiso,
+        desde,
+        limite,
+        totalPermisos,
+        obtenerPermisos,
         handleGuardarPermiso,
         consultarPermiso,
         setCargandoPermiso,
         eliminarPermiso,
-        imprimirReciboPDF
+        imprimirReciboPDF,
+        setDesde,
+        setLimite
       }}
     >
       {children}
