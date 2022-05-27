@@ -136,6 +136,7 @@ const Registrar = () => {
           error: true,
           msg: 'El password debe tener una longitud minima de 5 caracteres'
         })
+        return;
       }
 
       try {
