@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import usePermiso from '../hooks/usePermiso'
 import { Link, useParams } from 'react-router-dom'
 import formatearFecha from '../helpers/formatearFecha';
+import Loader from '../components/Loader/Loader';
 
 const DetallePermiso = () => {
   const { permiso, consultarPermiso, cargandoPermiso, setCargandoPermiso, eliminarPermiso, imprimirReciboPDF } = usePermiso();
@@ -18,7 +19,7 @@ const DetallePermiso = () => {
   // console.log(cargandoPermiso);
 
   if (cargandoPermiso) {
-    return 'Cargando...'
+    return (<Loader/>)
   }
 
   const { concepto, fechaCreacion, fechas, notas, _id } = permiso;

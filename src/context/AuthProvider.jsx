@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import clienteAxios from "../config/clienteAxios";
+import usePermiso from "../hooks/usePermiso";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-
 
   const [auth, setAuth] = useState({});
   const [cargando, setCargando] = useState(true);
@@ -21,6 +21,9 @@ const AuthProvider = ({ children }) => {
     password2: '',
   });
   // const navigate = useNavigate();
+  
+ 
+  
 
   useEffect(() => {
 

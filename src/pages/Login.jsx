@@ -28,7 +28,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (email === '' || password === '') {
+    if (email.trim() === '' || password.trim() === '') {
       setAlerta({
         msg: 'Todos los campos son obligatorios',
         error: true
@@ -46,8 +46,6 @@ const Login = () => {
         error: true
       })
     }
-
-
   }
 
   const { msg } = alerta;

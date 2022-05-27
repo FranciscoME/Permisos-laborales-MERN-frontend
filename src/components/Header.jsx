@@ -1,9 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
+import usePermiso from '../hooks/usePermiso';
 
 const Header = () => {
+
   const {cerrarSesionAuth} = useAuth();
+  const {cerrarSesionPermisos} = usePermiso();
+
+  const cerrarSesion = ()=>{
+    cerrarSesionAuth();
+    cerrarSesionPermisos();
+  }
+
   return (
     <header className='px-4 py-5 bg-white border-b'>
       <div className=' md:flex md:justify-between'>
@@ -28,7 +37,7 @@ const Header = () => {
           <button
             type='button'
             className='text-white text-sm bg-sky-600 p-3 rounded-md uppercase font-bold'
-            onClick={cerrarSesionAuth}
+            onClick={cerrarSesion}
           >
             Cerrar Sesion
           </button>

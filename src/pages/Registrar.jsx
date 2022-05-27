@@ -251,14 +251,14 @@ const Registrar = () => {
       }
 
       <form
-        className='my-4 bg-white shadow rounded-sm p-10 ml-20 '
+        className='mt-5  bg-white shadow rounded-lg p-2 ml-20 '
         onSubmit={handleSubmit}
       >
         <Alerta alerta={alerta} />
         <div className='my-5'>
           <label
             htmlFor="nombre"
-            className='uppercase block text-xl font-bold'>Nombre:</label>
+            className='uppercase block text-md font-bold'>Nombre:</label>
           <input
             type="text"
             id='nombre'
@@ -266,13 +266,13 @@ const Registrar = () => {
             value={nombre}
             name='nombre'
             onChange={handleChange}
-            className='mt-3 p-3 bordr rounded-xl bg-gray-50 w-full'
+            className='mt-3 p-3 bordr rounded-xl bg-gray-50 w-full md:w-3/6'
           />
         </div>
         <div className='my-5'>
           <label
             htmlFor="email"
-            className='uppercase block text-xl font-bold'>Correo electronico:</label>
+            className='uppercase block text-md font-bold'>Correo electronico:</label>
           <input
             type="email"
             id='email'
@@ -280,7 +280,7 @@ const Registrar = () => {
             value={email}
             name='email'
             onChange={handleChange}
-            className='mt-3 p-3 bordr rounded-xl bg-gray-50 w-full'
+            className='mt-3 p-3 bordr rounded-xl bg-gray-50 w-full md:w-3/6'
           />
         </div>
         {
@@ -289,7 +289,7 @@ const Registrar = () => {
               <div className='my-5'>
                 <label
                   htmlFor="password1"
-                  className='uppercase block text-xl font-bold'>Contraseña:</label>
+                  className='uppercase block text-md font-bold'>Contraseña:</label>
                 <input
                   type="password"
                   id='password1'
@@ -297,13 +297,13 @@ const Registrar = () => {
                   value={password1}
                   name='password1'
                   onChange={handleChange}
-                  className='mt-3 p-3 bordr rounded-xl bg-gray-50 w-full'
+                  className='mt-3 p-3 bordr rounded-xl bg-gray-50 w-full md:w-3/6'
                 />
               </div>
               <div className='my-5'>
                 <label
                   htmlFor="password2"
-                  className='uppercase block text-xl font-bold'>Repetir contraseña:</label>
+                  className='uppercase block text-md font-bold'>Repetir contraseña:</label>
                 <input
                   type="password"
                   id='password2'
@@ -311,7 +311,7 @@ const Registrar = () => {
                   name='password2'
                   value={password2}
                   onChange={handleChange}
-                  className='mt-3 p-3 bordr rounded-xl bg-gray-50 w-full'
+                  className='mt-3 p-3 bordr rounded-xl bg-gray-50 w-full md:w-3/6'
                 />
               </div>
             </>
@@ -320,7 +320,7 @@ const Registrar = () => {
         <div className='my-5'>
           <label
             htmlFor="departamento"
-            className='uppercase block text-xl font-bold mb-2'>Departamento:</label>
+            className='uppercase block text-md font-bold mb-2'>Departamento:</label>
           <select
             name="departamento"
             id="departamento"
@@ -346,7 +346,7 @@ const Registrar = () => {
         <div className='my-5'>
           <label
             htmlFor="turno"
-            className='uppercase block text-xl font-bold mb-2'>Turno:</label>
+            className='uppercase block text-md font-bold mb-2'>Turno:</label>
           <select
             onChange={handleChange}
             name='turno'
@@ -370,7 +370,7 @@ const Registrar = () => {
         <div className='my-5'>
           <label
             htmlFor="tarjeta"
-            className='uppercase block text-xl font-bold'> No. de tarjeta:</label>
+            className='uppercase block text-md font-bold'> No. de tarjeta:</label>
           <input
             type="number"
             id='tarjeta'
@@ -378,7 +378,7 @@ const Registrar = () => {
             value={tarjeta}
             name='tarjeta'
             onChange={handleChange}
-            className='mt-3 p-3 bordr rounded-xl bg-gray-50 w-full'
+            className='mt-3 p-3 bordr rounded-xl bg-gray-50 w-full md:w-1/3'
           />
         </div>
 
@@ -393,7 +393,7 @@ const Registrar = () => {
 
       {
         !isUpdateUser && (
-          <nav className='lg:flex text-center flex-col'>
+          <nav className='lg:flex text-center flex-col mt-3'>
             <Link
               to="/"
               className="block text-center text-white uppercase text-sm font-bold mb-3"
