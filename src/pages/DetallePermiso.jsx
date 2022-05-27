@@ -3,6 +3,7 @@ import usePermiso from '../hooks/usePermiso'
 import { Link, useParams } from 'react-router-dom'
 import formatearFecha from '../helpers/formatearFecha';
 import Loader from '../components/Loader/Loader';
+import toast, { Toaster } from 'react-hot-toast';
 
 const DetallePermiso = () => {
   const { permiso, consultarPermiso, cargandoPermiso, setCargandoPermiso, eliminarPermiso, imprimirReciboPDF } = usePermiso();
@@ -36,11 +37,13 @@ const DetallePermiso = () => {
 
   const handleReimprimirRecibo = () => {
     imprimirReciboPDF(_id);
+    toast.success('Reimprimiendo tu permiso.. espera.')
   }
 
 
   return (
     <div className='md:ml-10 w-full bg-slate-50  mt-10 flex flex-col items-center rounded-lg shadow-sm'>
+      <Toaster/>
 
       <p className='text-2xl font-semibold text-center'>Tipo de permiso <span className='text-sky-600 block'>{concepto}</span> </p>
       {/* <p>{permiso?.fechaCreacion}</p> */}

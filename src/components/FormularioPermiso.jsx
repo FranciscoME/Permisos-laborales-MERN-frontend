@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 import { diasEntreFechas, getYears } from '../helpers/fechas';
 import formatearFecha from '../helpers/formatearFecha';
 import useAuth from '../hooks/useAuth';
@@ -124,6 +125,7 @@ const FormularioPermiso = () => {
 
     // console.log(data);
     handleGuardarPermiso(data);
+    toast.success('Permiso generado! Espera tu pdf');
     
   }
 
@@ -132,6 +134,7 @@ const FormularioPermiso = () => {
   return (
     <>
 
+      <Toaster/>
       <form
         className='bg-white py-10 px-5 md:1/2 rounded md:m-10'
         onSubmit={handleSubmit}

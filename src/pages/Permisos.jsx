@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Toaster } from 'react-hot-toast';
 import Loader from '../components/Loader/Loader';
 import PreviewPermiso from '../components/PreviewPermiso';
 import usePermiso from '../hooks/usePermiso';
@@ -42,7 +43,7 @@ const Permisos = () => {
   return (
 
     <div className='m-10'>
-
+      <Toaster/>
       <h1
         className='ml-10 text-4xl font-black text-center mb-5'
       >Mis Permisos</h1>

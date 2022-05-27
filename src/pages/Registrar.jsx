@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Alerta from '../components/Alerta'
 import Loader from '../components/Loader/Loader';
@@ -111,10 +112,11 @@ const Registrar = () => {
         turno: '',
         tarjeta: ''
       })
+      toast.success('Usuario actualizado correctamente!')
 
-      setTimeout(() => {
-        navigate('/permisos')
-      }, 3000);
+      navigate('/permisos')
+      // setTimeout(() => {
+      // }, 1500);
 
 
     } else {
@@ -163,7 +165,8 @@ const Registrar = () => {
           turno: '',
           tarjeta: ''
         })
-
+        
+        toast.success('Usuario generado correctamente! Inicia sesion')
       } catch (error) {
         setAlerta({
           msg: error.response.data.msg,
@@ -244,6 +247,7 @@ const Registrar = () => {
 
   return (
     <>
+    <Toaster/>
       {
         isUpdateUser ?
           (<h1 className='text-sky-600 font-black text-2xl capitalize text-center'>Actualiza tu usuario</h1>)
