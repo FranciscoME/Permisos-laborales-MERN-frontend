@@ -14,10 +14,13 @@ const PermisosProvider = ({ children }) => {
   const [permisos, setPermisos] = useState([]);
   const [cargandoPermiso, setCargandoPermiso] = useState(true);
   const [cargandoPermisos, setCargandoPermisos] = useState(true);
+  const [cargandoDatosGenerales, setCargandoDatosGenerales] = useState(true)
 
   const [desde, setDesde] = useState(0);
   const [limite, setLimite] = useState(5);
   const [totalPermisos, setTotalPermisos] = useState(0);
+
+  const [datosGenerales, setDatosGenerales] = useState({});
 
   const { auth } = useAuth();
   const navigate = useNavigate();
@@ -68,6 +71,8 @@ const PermisosProvider = ({ children }) => {
 
   const handleGuardarPermiso = async (permiso) => {
     // console.log(permiso);
+    
+
     try {
       const token = localStorage.getItem('token');
       if (!token)
@@ -185,6 +190,34 @@ const PermisosProvider = ({ children }) => {
 
   }
 
+  const consultarDatosGenerales = async () => {
+    console.log('datos generales provider');
+    setCargandoDatosGenerales(true);
+    // setCargandoPermiso(true);
+    try {
+      const token = localStorage.getItem('token');
+      if (!token)
+        return;
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+      const {data} =await clienteAxios.get(`/permisos/datosgenerales`, config);
+      console.log(data);
+      setDatosGenerales(data);
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data,
+        error: true
+      })
+    }
+    // setCargandoPermiso(false);
+    setCargandoDatosGenerales(false)
+  }
+
 
   const cerrarSesionPermisos = ()=>{
     setPermisos([]);
@@ -206,6 +239,8 @@ const PermisosProvider = ({ children }) => {
         limite,
         totalPermisos,
         cargandoPermisos,
+        datosGenerales,
+        cargandoDatosGenerales,
         obtenerPermisos,
         handleGuardarPermiso,
         consultarPermiso,
@@ -214,7 +249,8 @@ const PermisosProvider = ({ children }) => {
         imprimirReciboPDF,
         setDesde,
         setLimite,
-        cerrarSesionPermisos
+        cerrarSesionPermisos,
+        consultarDatosGenerales,
       }}
     >
       {children}

@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import Alerta from '../components/Alerta'
@@ -29,7 +30,7 @@ const Login = () => {
     e.preventDefault();
 
     if (email.trim() === '' || password.trim() === '') {
-      setAlerta({
+     return setAlerta({
         msg: 'Todos los campos son obligatorios',
         error: true
       })

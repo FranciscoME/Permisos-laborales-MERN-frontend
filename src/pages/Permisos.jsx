@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast';
+import Dashboard from '../components/Dashboard';
 import Loader from '../components/Loader/Loader';
 import PreviewPermiso from '../components/PreviewPermiso';
+import useAuth from '../hooks/useAuth';
 import usePermiso from '../hooks/usePermiso';
+
+
+
 
 const Permisos = () => {
   const { permisos, totalPermisos, obtenerPermisos, cargandoPermisos, desde, limite, setDesde } = usePermiso();
+
 
   const [totalPaginas, setTotalPaginas] = useState();
   const [incrementoPaginacion, setIncrementoPaginacion] = useState(0);
@@ -17,6 +23,9 @@ const Permisos = () => {
     const noPaginas = Math.ceil(totalPermisos / limite)
     setTotalPaginas(noPaginas - 1)
   }, [totalPermisos])
+
+
+
 
 
   const onNextPage = () => {
@@ -34,6 +43,8 @@ const Permisos = () => {
   }
 
 
+
+
   if (cargandoPermisos) {
     return <Loader />
   }
@@ -43,21 +54,32 @@ const Permisos = () => {
   return (
 
     <div className='m-10'>
-      <Toaster/>
-      <h1
-        className='ml-10 text-4xl font-black text-center mb-5'
-      >Mis Permisos</h1>
-
-      <div className='bg-white shadow  rounded-lg  md:m-10 '>
-        {
-          permisos.map((permiso) => (
-            <PreviewPermiso
-              key={permiso._id}
-              permiso={permiso}
-            />
-          ))
-        }
+      <Toaster />
+      <div>
+        <Dashboard />
       </div>
+
+
+      <div>
+        <h1
+          className='ml-10 text-4xl font-black text-center mb-5'
+        >Mis Permisos</h1>
+
+        <div className='bg-white shadow  rounded-lg  md:m-10 '>
+          {
+            permisos.map((permiso) => (
+              <PreviewPermiso
+                key={permiso._id}
+                permiso={permiso}
+              />
+            ))
+          }
+        </div>
+
+      </div>
+
+
+
 
       {
         totalPermisos > 5 && (

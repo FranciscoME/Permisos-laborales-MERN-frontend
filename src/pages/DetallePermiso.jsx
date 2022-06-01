@@ -68,7 +68,7 @@ const DetallePermiso = () => {
       <p className='font-semibold text-center mt-4'>Notas</p>
       {
         permiso.concepto &&
-        <p className='p-3'>{notas}</p>
+        <p className='p-3 bg-slate-200'>{notas}</p>
       }
 
         <div className='bg-yellow-300 md:8/12 font-bold p-2 mb-4 rounded-md m-2 flex justify-items-center items-center'>

@@ -25,6 +25,9 @@ const getYears = ()=>{
   return [new Date().getFullYear(), new Date().getFullYear()-1]
 }
 
+const ordenarFechasString =(fechasArray)=>{
+  return [...fechasArray].sort((f1,f2)=> new Date(f1) - new Date(f2))
+}
 
 
 
@@ -32,5 +35,7 @@ const getYears = ()=>{
 
 export {
   getYears,
-  diasEntreFechas
+  diasEntreFechas,
+  ordenarFechasString
+
 }

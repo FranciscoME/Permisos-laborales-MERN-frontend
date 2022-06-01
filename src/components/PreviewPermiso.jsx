@@ -10,7 +10,7 @@ const PreviewPermiso = ({permiso}) => {
 
       <div className='flex flex-col'>
         <h3 className='font-bold text-center text-2xl '>{concepto}</h3>
-        <p className='font-bold mt-4'>Fecha: <span className='font-normal'>{formatearFecha(fechaCreacion)}</span></p>
+        <p className='font-bold mt-4'>Hecho el: <span className='font-normal'>{formatearFecha(fechaCreacion)}</span></p>
       </div>
 
       <div className='flex flex-col'>
